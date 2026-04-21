@@ -1,984 +1,1789 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <!-- ============================================================
+       META & SEO
+  ============================================================ -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Creative Designer & Visual Storyteller — portfolio, branding, and design services." />
+  <meta name="keywords" content="creative designer, branding, logo design, social media design, visual identity" />
+  <meta name="author" content="Ikhsan Maulana Akhmad" />
+  <meta property="og:title" content="Ikhsan Maulana Akhmad — Creative Designer" />
+  <meta property="og:description" content="Portfolio of a creative designer specializing in branding and visual storytelling." />
+  <meta property="og:type" content="website" />
+  <title>Ikhsan Maulana Akhmad — Creative Designer</title>
 
-  <title>Ikhsan Maulana Akhmad</title>
-  <meta content="Ikhsan Maulana Akhmad" name="description">
-  <meta content="Ikhsan Maulana Akhmad" name="keywords">
+  <!-- ============================================================
+       GOOGLE FONTS  (Cormorant Garamond + DM Sans)
+  ============================================================ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
 
-  <!-- Favicons -->
-  <link href="assets/img/ifavicon.png" rel="icon">
-  <link href="assets/img/ifavicon.png" rel="apple-touch-icon">
+  <style>
+    /* ============================================================
+       CSS CUSTOM PROPERTIES — edit once, change everywhere
+    ============================================================ */
+    :root {
+      /* --- Light Mode --- */
+      --bg:          #F5F2EE;
+      --bg-alt:      #EEEBE5;
+      --surface:     #FFFFFF;
+      --border:      #DDD9D2;
+      --text:        #1A1714;
+      --text-muted:  #7A7570;
+      --accent:      #C8A97E;
+      --accent-dark: #9E7D55;
+      --accent-glow: rgba(200,169,126,.18);
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+      /* --- Layout --- */
+      --max-w: 1200px;
+      --nav-h:  68px;
+      --radius: 6px;
+      --gap:    clamp(1.5rem, 4vw, 3rem);
 
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+      /* --- Type scale --- */
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body:    'DM Sans', sans-serif;
 
-  <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
+      /* --- Motion --- */
+      --ease: cubic-bezier(.25,.8,.25,1);
+      --fast: 160ms;
+      --mid:  320ms;
+      --slow: 600ms;
+    }
 
-  <!-- =======================================================
-  * Template Name: MyResume - v4.9.2
-  * Template URL: https://bootstrapmade.com/free-html-bootstrap-template-my-resume/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+    [data-theme="dark"] {
+      --bg:          #161412;
+      --bg-alt:      #1E1B18;
+      --surface:     #242019;
+      --border:      #302C27;
+      --text:        #EDE8E0;
+      --text-muted:  #8A857E;
+      --accent:      #C8A97E;
+      --accent-dark: #E8C99E;
+      --accent-glow: rgba(200,169,126,.12);
+    }
+
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.7;
+      transition: background var(--mid) var(--ease), color var(--mid) var(--ease);
+      overflow-x: hidden;
+    }
+
+    img { display: block; max-width: 100%; }
+    a  { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+
+    /* ============================================================
+       LOADING SCREEN
+    ============================================================ */
+    #loader {
+      position: fixed; inset: 0;
+      background: var(--bg);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 1.2rem;
+      z-index: 9999;
+      transition: opacity var(--slow) var(--ease), visibility var(--slow);
+    }
+
+    #loader.hidden { opacity: 0; visibility: hidden; }
+
+    .loader-name {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 300;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    .loader-bar-wrap {
+      width: 160px; height: 1px;
+      background: var(--border);
+      overflow: hidden;
+    }
+
+    .loader-bar {
+      height: 100%;
+      background: var(--accent);
+      width: 0%;
+      animation: loadBar 1.4s var(--ease) forwards;
+    }
+
+    @keyframes loadBar { to { width: 100%; } }
+
+    /* ============================================================
+       UTILITY
+    ============================================================ */
+    .container {
+      width: min(var(--max-w), 100% - 2 * clamp(1rem, 4vw, 3rem));
+      margin-inline: auto;
+    }
+
+    .section {
+      padding-block: clamp(4rem, 10vw, 8rem);
+    }
+
+    .section-label {
+      font-family: var(--font-body);
+      font-size: .72rem;
+      font-weight: 500;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--text);
+    }
+
+    .section-title em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .divider {
+      width: 48px; height: 1px;
+      background: var(--accent);
+      margin-block: 1.8rem;
+    }
+
+    /* Fade-in animation triggered by IntersectionObserver */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity var(--slow) var(--ease), transform var(--slow) var(--ease);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    .reveal-delay-1 { transition-delay: 100ms; }
+    .reveal-delay-2 { transition-delay: 220ms; }
+    .reveal-delay-3 { transition-delay: 340ms; }
+    .reveal-delay-4 { transition-delay: 460ms; }
+
+    /* ============================================================
+       NAVBAR
+    ============================================================ */
+    #navbar {
+      position: fixed; top: 0; inset-inline: 0;
+      height: var(--nav-h);
+      display: flex; align-items: center;
+      background: transparent;
+      z-index: 800;
+      transition: background var(--mid) var(--ease), border-bottom var(--mid) var(--ease), backdrop-filter var(--mid);
+    }
+
+    #navbar.scrolled {
+      background: color-mix(in srgb, var(--bg) 88%, transparent);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      width: min(var(--max-w), 100% - 2 * clamp(1rem, 4vw, 3rem));
+      margin-inline: auto;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 400;
+      letter-spacing: .08em;
+    }
+
+    .nav-links {
+      display: flex; gap: 2.4rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-size: .8rem;
+      font-weight: 400;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      position: relative;
+      transition: color var(--fast);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute; bottom: -3px; left: 0;
+      height: 1px; width: 0;
+      background: var(--accent);
+      transition: width var(--mid) var(--ease);
+    }
+
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-actions {
+      display: flex; align-items: center; gap: 1rem;
+    }
+
+    /* Theme toggle */
+    .theme-btn {
+      width: 36px; height: 36px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      background: none;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-muted);
+      transition: border-color var(--fast), color var(--fast), background var(--fast);
+    }
+
+    .theme-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-glow); }
+
+    .theme-btn svg { width: 16px; height: 16px; fill: currentColor; }
+
+    /* Hamburger (mobile) */
+    .hamburger {
+      display: none;
+      flex-direction: column; gap: 5px;
+      width: 28px; cursor: pointer;
+      background: none; border: none; padding: 4px;
+    }
+
+    .hamburger span {
+      display: block; height: 1.5px;
+      background: var(--text);
+      transition: transform var(--mid) var(--ease), opacity var(--mid), width var(--mid) var(--ease);
+    }
+
+    .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* Mobile menu drawer */
+    #mobile-menu {
+      display: none;
+      position: fixed; inset: 0; top: var(--nav-h);
+      background: color-mix(in srgb, var(--bg) 96%, transparent);
+      backdrop-filter: blur(16px);
+      flex-direction: column; align-items: center; justify-content: center;
+      gap: 2.4rem;
+      z-index: 799;
+      opacity: 0;
+      transition: opacity var(--mid) var(--ease);
+    }
+
+    #mobile-menu.open { display: flex; opacity: 1; }
+
+    #mobile-menu a {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 300;
+      letter-spacing: .06em;
+      color: var(--text);
+      transition: color var(--fast);
+    }
+
+    #mobile-menu a:hover { color: var(--accent); }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    #hero {
+      min-height: 100svh;
+      display: flex; align-items: center;
+      padding-top: var(--nav-h);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Decorative background grain */
+    #hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        radial-gradient(ellipse 80% 60% at 70% 40%, var(--accent-glow), transparent),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--gap);
+      align-items: center;
+    }
+
+    .hero-eyebrow {
+      font-size: .72rem;
+      font-weight: 500;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.4rem;
+    }
+
+    .hero-name {
+      font-family: var(--font-display);
+      font-size: clamp(3.2rem, 9vw, 7.5rem);
+      font-weight: 300;
+      line-height: 1.0;
+      letter-spacing: -.01em;
+      color: var(--text);
+    }
+
+    .hero-name em {
+      display: block;
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-tagline {
+      margin-top: 2rem;
+      font-size: clamp(.9rem, 1.8vw, 1.1rem);
+      color: var(--text-muted);
+      max-width: 38ch;
+      line-height: 1.8;
+    }
+
+    .hero-cta {
+      margin-top: 3rem;
+      display: flex; gap: 1rem; flex-wrap: wrap;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex; align-items: center; gap: .6rem;
+      padding: .85rem 2rem;
+      border-radius: var(--radius);
+      font-family: var(--font-body);
+      font-size: .78rem;
+      font-weight: 400;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all var(--mid) var(--ease);
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #1A1714;
+      border-color: var(--accent);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-dark);
+      border-color: var(--accent-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px var(--accent-glow);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border-color: var(--border);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    /* Hero visual */
+    .hero-visual {
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .hero-img-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 480px;
+      aspect-ratio: 4/5;
+      overflow: hidden;
+      border-radius: var(--radius);
+    }
+
+    .hero-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 8s ease;
+    }
+
+    .hero-img-wrap:hover img { transform: scale(1.04); }
+
+    /* Floating badge */
+    .hero-badge {
+      position: absolute;
+      bottom: -1.4rem; left: -1.8rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem 1.4rem;
+      display: flex; align-items: center; gap: .8rem;
+      box-shadow: 0 12px 36px rgba(0,0,0,.08);
+    }
+
+    .hero-badge-num {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .hero-badge-text {
+      font-size: .7rem;
+      color: var(--text-muted);
+      letter-spacing: .06em;
+      line-height: 1.4;
+    }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: absolute; bottom: 2.4rem; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: .5rem;
+      color: var(--text-muted);
+      font-size: .65rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    .scroll-line {
+      width: 1px; height: 40px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%,100% { opacity: .4; transform: scaleY(1); }
+      50%      { opacity: 1;  transform: scaleY(1.15); }
+    }
+
+    /* ============================================================
+       ABOUT
+    ============================================================ */
+    #about {
+      background: var(--bg-alt);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: var(--gap);
+      align-items: start;
+    }
+
+    .about-img-wrap {
+      position: relative;
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      border-radius: var(--radius);
+    }
+
+    .about-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform var(--slow) var(--ease);
+    }
+
+    .about-img-wrap:hover img { transform: scale(1.04); }
+
+    /* Decorative frame */
+    .about-img-wrap::after {
+      content: '';
+      position: absolute; top: 14px; left: 14px;
+      inset: 14px -14px -14px 14px;
+      border: 1px solid var(--accent);
+      border-radius: var(--radius);
+      z-index: -1;
+    }
+
+    .about-text p {
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      font-size: .95rem;
+    }
+
+    .about-text p strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* Skills chips */
+    .skills-grid {
+      display: flex; flex-wrap: wrap; gap: .6rem;
+      margin-top: 2.4rem;
+    }
+
+    .skill-chip {
+      padding: .45rem 1.1rem;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: .72rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      transition: border-color var(--fast), color var(--fast), background var(--fast);
+    }
+
+    .skill-chip:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-glow);
+    }
+
+    /* Stats row */
+    .stats-row {
+      display: flex; gap: 2.4rem;
+      margin-top: 2.8rem;
+      padding-top: 2.4rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 2.6rem;
+      font-weight: 300;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: .7rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: .3rem;
+    }
+
+    /* ============================================================
+       SERVICES
+    ============================================================ */
+    #services {
+      background: var(--bg);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.4rem;
+      margin-top: var(--gap);
+    }
+
+    .service-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem 1.8rem;
+      transition: border-color var(--mid) var(--ease), transform var(--mid) var(--ease), box-shadow var(--mid) var(--ease);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: var(--accent-glow);
+      opacity: 0;
+      transition: opacity var(--mid) var(--ease);
+    }
+
+    .service-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,.06);
+    }
+
+    .service-card:hover::before { opacity: 1; }
+
+    .service-icon {
+      width: 44px; height: 44px;
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--accent);
+      margin-bottom: 1.4rem;
+      transition: border-color var(--fast), background var(--fast);
+    }
+
+    .service-card:hover .service-icon {
+      border-color: var(--accent);
+      background: var(--accent-glow);
+    }
+
+    .service-icon svg { width: 20px; height: 20px; }
+
+    .service-title {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 400;
+      margin-bottom: .6rem;
+      color: var(--text);
+    }
+
+    .service-desc {
+      font-size: .85rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* ============================================================
+       PORTFOLIO
+    ============================================================ */
+    #portfolio {
+      background: var(--bg-alt);
+    }
+
+    .portfolio-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.4rem;
+      margin-bottom: var(--gap);
+    }
+
+    /* Filter bar */
+    .filter-bar {
+      display: flex; gap: .5rem; flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: .4rem 1.1rem;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      background: none;
+      font-family: var(--font-body);
+      font-size: .72rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all var(--fast);
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #1A1714;
+    }
+
+    /* Portfolio grid */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.4rem;
+    }
+
+    .port-item {
+      cursor: pointer;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      transition: transform var(--mid) var(--ease), box-shadow var(--mid) var(--ease), opacity var(--mid), border-color var(--mid);
+    }
+
+    .port-item:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 48px rgba(0,0,0,.10);
+      border-color: var(--accent);
+    }
+
+    .port-item.hidden {
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(.95);
+    }
+
+    .port-thumb {
+      position: relative;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+    }
+
+    .port-thumb img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform var(--slow) var(--ease);
+    }
+
+    .port-item:hover .port-thumb img { transform: scale(1.06); }
+
+    .port-overlay {
+      position: absolute; inset: 0;
+      background: color-mix(in srgb, var(--text) 60%, transparent);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0;
+      transition: opacity var(--mid) var(--ease);
+    }
+
+    .port-overlay svg { color: #fff; width: 28px; height: 28px; }
+
+    .port-item:hover .port-overlay { opacity: 1; }
+
+    .port-category-badge {
+      position: absolute; top: .8rem; left: .8rem;
+      background: var(--accent);
+      color: #1A1714;
+      font-size: .62rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: .25rem .7rem;
+      border-radius: 100px;
+      font-weight: 500;
+    }
+
+    .port-info {
+      padding: 1.2rem 1.4rem 1.4rem;
+    }
+
+    .port-title {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+
+    .port-desc {
+      font-size: .8rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ============================================================
+       PORTFOLIO MODAL
+    ============================================================ */
+    #modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.7);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: flex; align-items: center; justify-content: center;
+      padding: 1.5rem;
+      opacity: 0; pointer-events: none;
+      transition: opacity var(--mid) var(--ease);
+    }
+
+    #modal-overlay.open { opacity: 1; pointer-events: all; }
+
+    .modal {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: calc(var(--radius) * 2);
+      max-width: 860px; width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      transform: translateY(20px) scale(.97);
+      transition: transform var(--mid) var(--ease);
+    }
+
+    #modal-overlay.open .modal { transform: none; }
+
+    .modal-img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      border-radius: calc(var(--radius) * 2) calc(var(--radius) * 2) 0 0;
+    }
+
+    .modal-body { padding: 2rem 2.4rem 2.4rem; }
+
+    .modal-tag {
+      font-size: .68rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: .8rem;
+    }
+
+    .modal-title {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+
+    .modal-desc {
+      font-size: .9rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+
+    .modal-close {
+      position: absolute; top: 1rem; right: 1rem;
+      width: 36px; height: 36px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      background: var(--surface);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text);
+      font-size: 1.2rem;
+      transition: border-color var(--fast), color var(--fast);
+    }
+
+    .modal-close:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ============================================================
+       TESTIMONIALS
+    ============================================================ */
+    #testimonials {
+      background: var(--bg);
+    }
+
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.4rem;
+      margin-top: var(--gap);
+    }
+
+    .testi-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      transition: border-color var(--mid) var(--ease), transform var(--mid) var(--ease);
+    }
+
+    .testi-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    .testi-quote {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      line-height: 1;
+      color: var(--accent);
+      opacity: .4;
+      margin-bottom: .4rem;
+    }
+
+    .testi-text {
+      font-size: .9rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 1.6rem;
+    }
+
+    .testi-author {
+      display: flex; align-items: center; gap: .9rem;
+    }
+
+    .testi-avatar {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--border);
+    }
+
+    .testi-name {
+      font-weight: 500;
+      font-size: .85rem;
+      color: var(--text);
+    }
+
+    .testi-role {
+      font-size: .72rem;
+      color: var(--text-muted);
+      letter-spacing: .06em;
+    }
+
+    .star-row {
+      display: flex; gap: 3px;
+      margin-bottom: .8rem;
+    }
+
+    .star-row svg { width: 13px; height: 13px; fill: var(--accent); }
+
+    /* ============================================================
+       CONTACT
+    ============================================================ */
+    #contact {
+      background: var(--bg-alt);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: var(--gap);
+      align-items: start;
+    }
+
+    .contact-info p {
+      font-size: .9rem;
+      color: var(--text-muted);
+      max-width: 36ch;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    .contact-details {
+      display: flex; flex-direction: column; gap: 1rem;
+    }
+
+    .contact-detail {
+      display: flex; align-items: center; gap: .9rem;
+      font-size: .85rem;
+      color: var(--text-muted);
+    }
+
+    .contact-detail-icon {
+      width: 38px; height: 38px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .contact-detail-icon svg { width: 16px; height: 16px; }
+
+    /* Form */
+    .form-group { margin-bottom: 1.2rem; }
+
+    .form-group label {
+      display: block;
+      font-size: .72rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: .5rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: .85rem 1.1rem;
+      font-family: var(--font-body);
+      font-size: .9rem;
+      color: var(--text);
+      transition: border-color var(--fast), box-shadow var(--fast);
+      outline: none;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: var(--text-muted); }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 130px; }
+
+    /* WhatsApp button */
+    .wa-btn {
+      display: inline-flex; align-items: center; gap: .7rem;
+      background: #25D366; color: #fff;
+      padding: .85rem 1.8rem;
+      border-radius: var(--radius);
+      font-size: .78rem;
+      font-weight: 500;
+      letter-spacing: .06em;
+      margin-top: 1.6rem;
+      transition: background var(--fast), transform var(--fast);
+    }
+
+    .wa-btn:hover { background: #1EBE59; transform: translateY(-2px); }
+    .wa-btn svg { width: 18px; height: 18px; }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding-block: 2.4rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--text);
+    }
+
+    .footer-copy {
+      font-size: .72rem;
+      color: var(--text-muted);
+      letter-spacing: .06em;
+    }
+
+    .social-links {
+      display: flex; gap: .6rem;
+    }
+
+    .social-link {
+      width: 36px; height: 36px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-muted);
+      transition: border-color var(--fast), color var(--fast), background var(--fast);
+    }
+
+    .social-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-glow);
+    }
+
+    .social-link svg { width: 15px; height: 15px; }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 900px) {
+      .hero-grid   { grid-template-columns: 1fr; }
+      .about-grid  { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .about-img-wrap { max-width: 380px; }
+      .hero-visual { display: none; }
+    }
+
+    @media (max-width: 700px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .stats-row { gap: 1.4rem; }
+    }
+
+    @media (max-width: 480px) {
+      .portfolio-grid { grid-template-columns: 1fr; }
+      .services-grid  { grid-template-columns: 1fr; }
+      .testi-grid     { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 
 <body>
-  <a href="https://wa.me/6285156074242?text=Halo%20Ikhsan,%20" class="float" target="_blank">
-    <i class="bi bi-whatsapp my-float"></i>
-  </a>
 
-  <!-- ======= Mobile nav toggle button ======= -->
-  <!-- <button type="button" class="mobile-nav-toggle d-xl-none"><i class="bi bi-list mobile-nav-toggle"></i></button> -->
-  <i class="bi bi-list mobile-nav-toggle d-lg-none"></i>
-  <!-- ======= Header ======= -->
-  <header id="header" class="d-flex flex-column justify-content-center">
+  <!-- ============================================================
+       LOADING SCREEN
+  ============================================================ -->
+  <div id="loader" aria-hidden="true">
+    <span class="loader-name">Ikhsan Maulana Akhmad</span>
+    <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
+  </div>
 
-    <nav id="navbar" class="navbar nav-menu">
-      <ul>
-        <li><a href="#hero" class="nav-link scrollto active"><i class="bx bx-home"></i> <span>Home</span></a></li>
-        <li><a href="#about" class="nav-link scrollto"><i class="bx bx-user"></i> <span>About</span></a></li>
-        <li><a href="#resume" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>Resume</span></a></li>
-        <li><a href="#portfolio" class="nav-link scrollto"><i class="bx bx-book-content"></i> <span>Portfolio</span></a></li>
-        <li><a href="#contact" class="nav-link scrollto"><i class="bx bx-envelope"></i> <span>Contact</span></a></li>
+  <!-- ============================================================
+       NAVBAR
+  ============================================================ -->
+  <nav id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <!-- Logo -->
+      <a href="#hero" class="nav-logo">YN.</a>
+
+      <!-- Desktop links -->
+      <ul class="nav-links" role="list">
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+        <li><a href="#contact">Contact</a></li>
       </ul>
-    </nav><!-- .nav-menu -->
 
-  </header><!-- End Header -->
+      <!-- Actions -->
+      <div class="nav-actions">
+        <!-- Theme toggle -->
+        <button class="theme-btn" id="theme-toggle" aria-label="Toggle dark/light mode">
+          <!-- Sun icon (shown in dark mode) -->
+          <svg id="icon-sun" viewBox="0 0 24 24" style="display:none"><path d="M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0-14v2m0 18v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m18 0h2M4.93 19.07l1.41-1.41M18.66 5.34l1.41-1.41"/></svg>
+          <!-- Moon icon (shown in light mode) -->
+          <svg id="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg>
+        </button>
 
-  <!-- ======= Hero Section ======= -->
-  <section id="hero" class="d-flex flex-column justify-content-center">
-    <div class="container" data-aos="zoom-in" data-aos-delay="100">
-      <h1 style="font-family: 'Poppins Bold', Poppins, monospace;">Ikhsan Maulana Akhmad</h1>
-
-      <p>I'm <span class="typed" data-typed-items="Graphic Designer, Content Creator, Freelancer, Photographer"></span></p>
-
-      
-      <!-- Tampilan Desktop"> -->
-        <div class="d-none d-md-block">
-          <div class="py-md-5 mb-md-5">
-            <a href="https://drive.google.com/file/d/15qzCg7rIb6KBXb8GvkW8OdyFUDzRtUNo/view?usp=drive_link" target="_blank" class="btn-sm btn-social-media-primary">Download CV</a>
-          </div>
-        </div>
-
-        <!-- Tampilan Mobile"> -->
-        <div class="d-block d-md-none">
-          <div class="py-5">
-            <div class="py-md-5 mb-md-5">
-              <a href="https://drive.google.com/file/d/15qzCg7rIb6KBXb8GvkW8OdyFUDzRtUNo/view?usp=drive_link" target="_blank" class="btn-sm btn-social-media-primary">Download CV</a>
-            </div>
-          </div>
-        </div>
-
-        
+        <!-- Hamburger -->
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
-  </section><!-- End Hero -->
-
-  <main id="main">
-
-    <!-- ======= About Section ======= -->
-    <section id="about" class="about">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>About</h2>
-          <p>I have quite good expertise in Graphic Design, from early 2020 to 2022 I worked as a Freelancer for two years and also worked on individual projects.</p>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-4">
-            <img src="assets/img/ikhsan.jpg" class="img-fluid" alt="">
-          </div>
-          <div class="col-lg-8 pt-4 pt-lg-0 content">
-            <h3>Graphic Designer &amp; Freelancer.</h3>
-            <p class="fst-italic">
-              Hi, my name is Ikhsan Maulana Akhmad, you can call me Ikhsan. I am a very motivated person, willing to learn new things, responsible and honest.
-            </p>
-            <div class="row">
-              <div class="col-lg-6">
-                <ul>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Website:</strong> <span>ikhsanmaulanaakhmad.github.io</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Phone:</strong> <span>+62 851-5607-4242</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>City:</strong> <span>Yogyakarta, Indonesia</span></li>
-                </ul>
-              </div>
-              <div class="col-lg-6">
-                <ul>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Degree:</strong> <span>Bachelor Degree</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Email:</strong> <span> ikhma454@gmail.com</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Freelance:</strong> <span>Available</span></li>
-                </ul>
-              </div>
-            </div>
-            <p class="justify-content-around">
-              I am able to use several Graphic Design applications, namely Corel Draw, Adobe Photoshop, Figma, Adobe Illustrator and also understand Photography, Videography and Video Editing, the applications that are often used are Adobe Premiere Pro and Adobe Lightroom.
-            </p>
-          </div>
-        </div>
-
-      </div>
-    </section><!-- End About Section -->
-
-
-    <!-- ======= Skills Section ======= -->
-    <section id="skills" class="skills section-bg">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Skills</h2>
-          <!-- <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p> -->
-        </div>
-
-        <div class="row skills-content">
-
-          <div class="col-lg-6">
-
-            <div class="progress">
-              <span class="skill">Coreldraw <i class="val">90%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div>
-
-            <div class="progress">
-              <span class="skill">Figma <i class="val">75%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div>
-
-            <div class="progress">
-              <span class="skill">Adobe Pohotoshop <i class="val">80%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="col-lg-6">
-
-            <div class="progress">
-              <span class="skill">Adobe Ilustrator <i class="val">90%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div>
-
-            <div class="progress">
-              <span class="skill">Adobe After Effect <i class="val">80%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div>
-
-            <div class="progress">
-              <span class="skill">Adobe Lightroom <i class="val">85%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-    </section><!-- End Skills Section -->
-
-    <!-- ======= Resume Section ======= -->
-    <section id="resume" class="resume">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Resume</h2>
-          <!-- <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p> -->
-        </div>
-
-        <div class="row">
-          <div class="col-lg-6">
-            <!-- <h3 class="resume-title">Education</h3>
-            <div class="resume-item pb-0">
-              <h4>Brandon Johnson</h4>
-              <p><em>Innovative and deadline-driven Graphic Designer with 3+ years of experience designing and developing user-centered digital/print marketing material from initial concept to final, polished deliverable.</em></p>
-              <ul>
-                <li>Portland par 127,Orlando, FL</li>
-                <li>(123) 456-7891</li>
-                <li>alice.barkley@example.com</li>
-              </ul>
-            </div> -->
-
-            <h3 class="resume-title">Education</h3>
-            <div class="resume-item">
-              <h4>Yogyakarta Amikom University </h4>
-              <h5>2017-2021</h5>
-              <p><em>Information Systems Study Program with a concentration in Multimedia</em></p>
-              <ul>
-                <li>Received the best title in making the Oemah Kopi Company Profile video in Purworejo.</li>
-                <li>Handling the LPG gas sales website project in Boyolali.</li>
-                <li>Getting the top three rankings for designing a magazine with a technology theme.</li>
-              </ul>
-            </div>
-            <div class="resume-item">
-              <h4>Bulakamba Muhammadiyah Vocational High School</h4>
-              <h5>2014 - 2017</h5>
-              <p><em>Multimedia</em></p>
-              <ul>
-                <li>Always get the top five in the class.</li>
-                <li>Became class president in twelfth grade.</li>
-              </ul>
-            </div>
-
-            <h3 class="resume-title">Organization & Volunteer</h3>
-            <div class="resume-item">
-              <h4>Amikom Multimedia Community (KOMA)</h4>
-              <h5>2017 - 2018</h5>
-              <p><b><em>Active member </em></b></p>
-              <ul>
-                <li>Create WPAP, Vector, Posters, Short Films, Motion Graphics, etc.</li>
-              </ul>
-            </div>
-            <div class="resume-item">
-              <h4>Informatics and Information Systems Management Student Association (HIMMSI)</h4>
-              <h5>2018 - 2019</h5>
-              <p><b><em>Creative Designer </em></b></p>
-              <ul>
-                <li>Designing X banners, backdrops, event posters, infographics, promotional videos, event flashback videos and more at almost all HIMMSI events.</li>
-              </ul>
-              <p><b><em>Internal Department Staff </em></b></p>
-              <ul>
-                <li>Create an effective and quality cadre framework.</li>
-                <li>Create and process data for prospective management cadres.</li>
-                <li>Prosperity and accommodate the aspirations of the management.</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="col-lg-6">
-            <h3 class="resume-title">Experience</h3>
-            <div class="resume-item">
-              <h4>Freelancer</h4>
-              <h5>2020 - 2022</h5>
-              <p><b><em>A-Creative Indonesia </em></b></p>
-              <ul>
-                <li>Holding 1 client to handle Instagram posts every day until the contract with the client is completed.</li>
-              </ul>
-              <p><b><em>Muhadi Setiabudi University </em></b></p>
-              <ul>
-                <li>Create an Instagram post design.</li>
-                <li>Create event banner designs.</li>
-              </ul>
-            </div>
-            <div class="resume-item">
-              <h4>Retail Store Manager</h4>
-              <h5>2022 - 2023</h5>
-              <p><b><em>Toko Ibu Istikharoh </em></b></p>
-            </div>
-            <div class="resume-item">
-              <h4>Content Creator</h4>
-              <h5>2023 - Present</h5>
-              <p><b><em>Lovary </em></b></p>
-              <ul>
-                <li>Create designs for marketing and advertising purposes.</li>
-                <li>Make several videos for marketing and advertising purposes.</li>
-              </ul>
-              
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section><!-- End Resume Section -->
-
-    <!-- ======= Portfolio Section ======= -->
-    <section id="portfolio" class="portfolio section-bg">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Portfolio</h2>
-          <!-- <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p> -->
-        </div>
-
-        <div class="row">
-          <div class="col-lg-12 d-flex justify-content-center" data-aos="fade-up" data-aos-delay="100">
-            <ul id="portfolio-flters">
-              <li data-filter="*" class="filter-active">All</li>
-              <li data-filter=".filter-design">Graphic Design</li>
-              <li data-filter=".filter-photo">Photography</li>
-              <li data-filter=".filter-video">Video</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
-          <!-- DESIGN PORFOLIO -->
-          <div class="col-lg-4 col-md-6 portfolio-item filter-design">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/graphic-design/1.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Pamflet Pencegahan Covid-19</h4>
-                <p>Kampus 2 Muhadi Setia Budi Brebes</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/graphic-design/1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-design">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/graphic-design/2.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Banner Pelatihan Desain Grafis</h4>
-                <p>AMIKOM Yogyakarta</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/graphic-design/2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-design">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/graphic-design/3.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Banner Toko Istikharoh</h4>
-                <p>Toko Istikharoh</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/graphic-design/3.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-design">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/graphic-design/4.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Poster Magang Calon Pengurus HIMMSI</h4>
-                <p>AMIKOM Yogyakarta</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/graphic-design/4.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-design">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/graphic-design/5.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Poster Pelantikan Pengurus HIMMSI</h4>
-                <p>AMIKOM Yogyakarta</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/graphic-design/5.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-design">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/graphic-design/6.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Banner Dialog Program Studi</h4>
-                <p>AMIKOM Yogyakarta</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/graphic-design/6.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-design">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/graphic-design/7.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Vector</h4>
-                <p>Freelancer</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/graphic-design/7.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-design">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/graphic-design/8.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>New Born Baby Poster</h4>
-                <p>Freelancer</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/graphic-design/8.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-design">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/graphic-design/9.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Pricelist Diaomd Free Fire</h4>
-                <p>Freelancer</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/graphic-design/9.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 3"><i class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-design">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/graphic-design/10.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Pricelist Diaomd Mobile Legend</h4>
-                <p>Freelancer</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/graphic-design/10.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-design">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/graphic-design/11.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Lesson Schedule</h4>
-                <p>Freelancer</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/graphic-design/11.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-design">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/graphic-design/12.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Picket Schedule</h4>
-                <p>Freelancer</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/graphic-design/12.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-design">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/graphic-design/13.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Football jersey designs</h4>
-                <p>Freelancer</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/graphic-design/13.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-design">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/graphic-design/14.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Football jersey designs</h4>
-                <p>Freelancer</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/graphic-design/14.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-design">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/graphic-design/15.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Aqiqah Design</h4>
-                <p>Freelancer</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/graphic-design/15.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-design">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/graphic-design/16.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Nusantara Chocolate Design</h4>
-                <p>Freelancer</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/graphic-design/16.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 portfolio-item filter-design">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/graphic-design/17.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>T-Shirt Design Contest Poster</h4>
-                <p>AMIKOM Yogyakarta</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/graphic-design/17.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-design">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/graphic-design/18.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>CANDUT Game Store Logo</h4>
-                <p>Freelancer</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/graphic-design/18.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-design">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/graphic-design/19.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Parfum Pemikat Design</h4>
-                <p>Freelancer</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/graphic-design/19.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-design">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/graphic-design/20.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>HIMMSI</h4>
-                <p>AMIKOM Yogyakarta</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/graphic-design/20.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-design">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/graphic-design/21.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Graduation Instagram design</h4>
-                <p>Kampus 2 Universitas Muhadi Setiabudi Brebes</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/graphic-design/21.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-design">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/graphic-design/23.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>HIMMSI Goes To School</h4>
-                <p>AMIKOM Yogyakarta</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/graphic-design/23.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-design">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/graphic-design/24.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Study Program Dialogue</h4>
-                <p>AMIKOM Yogyakarta</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/graphic-design/24.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-design">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/graphic-design/25.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>New Product Design</h4>
-                <p>Freelancer</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/graphic-design/25.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-design">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/graphic-design/26.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4> Product Design</h4>
-                <p>Freelancer</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/graphic-design/26.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-design">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/graphic-design/27.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Class organizational structure</h4>
-                <p>Freelancer</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/graphic-design/27.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-design">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/graphic-design/28.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Vector Design</h4>
-                <p>Freelancer</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/graphic-design/28.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-design">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/graphic-design/29.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>UMUS Care for Covid-19</h4>
-                <p>UMUS</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/graphic-design/29.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-design">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/graphic-design/30.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Happy Graduation Banner</h4>
-                <p>UMUS</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/graphic-design/30.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- END DESIGN PORFOLIO -->
-
-          <!-- PHOTOGRAPY PORFOLIO -->
-          <div class="col-lg-4 col-md-6 portfolio-item filter-photo">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/Photography/1.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <p>ZOOM</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/Photography/1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-photo">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/Photography/2.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <p>ZOOM</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/Photography/2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="col-lg-4 col-md-6 portfolio-item filter-photo">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/Photography/3.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <p>ZOOM</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/Photography/3.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-photo">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/Photography/4.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <p>ZOOM</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/Photography/4.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-photo">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/Photography/5.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <p>ZOOM</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/Photography/5.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-photo">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/Photography/6.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <p>ZOOM</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/Photography/6.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-photo">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/Photography/7.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <p>ZOOM</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/Photography/7.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-photo">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/Photography/8.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <p>ZOOM</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/Photography/8.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-photo">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/Photography/9.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <p>ZOOM</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/Photography/9.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-photo">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/Photography/10.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <p>ZOOM</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/Photography/10.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-photo">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/Photography/11.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <p>ZOOM</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/Photography/11.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- END PHOTOGRAPY PORFOLIO -->
-
-          <!-- VIDEO PORFOLIO -->
-          <div class="col-lg-4 col-md-6 portfolio-item filter-video">
-            <!-- <div class="portfolio-wrap"> -->
-              <iframe src="https://drive.google.com/file/d/1rxSaPsZNdhFyU-ZzPqj28FBCTtAyMhXQ/preview" class="img-fluid" allow="autoplay">
-
-              </iframe>
-            <!-- </div> -->
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-video">
-            <!-- <div class="portfolio-wrap"> -->
-              <iframe src="https://drive.google.com/file/d/1YBXVD6Rc11BIs_gnd-N9RfL2yMQOoHFE/preview" class="img-fluid" allow="autoplay">
-
-              </iframe>
-            <!-- </div> -->
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-video">
-            <!-- <div class="portfolio-wrap"> -->
-              <iframe src="https://drive.google.com/file/d/1O3dhwT6Rie8Dy_nO7qqNMEt3MNauT8rI/preview" class="img-fluid" allow="autoplay">
-
-              </iframe>
-            <!-- </div> -->
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-video">
-            <!-- <div class="portfolio-wrap"> -->
-              <iframe src="https://drive.google.com/file/d/1g3u4wd4k8gWimaXh35ng_TCyjUdCi3Oz/preview" class="img-fluid" allow="autoplay">
-
-              </iframe>
-            <!-- </div> -->
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-video">
-            <!-- <div class="portfolio-wrap"> -->
-              <iframe src="https://drive.google.com/file/d/1nGLOwKLpgpqYW9KG67Cc2O0aV9g7gnaW/preview" class="img-fluid" allow="autoplay">
-
-              </iframe>
-            <!-- </div> -->
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-video">
-            <!-- <div class="portfolio-wrap"> -->
-              <iframe src="https://drive.google.com/file/d/1w24Y_tr2C0KK_oBrTpWWfj0lIEc4XJZP/preview" class="img-fluid" allow="autoplay">
-
-              </iframe>
-            <!-- </div> -->
-          </div>
-          <!-- END VIDEO PORFOLIO -->
-
-        </div>
-
-      </div>
-    </section><!-- End Portfolio Section -->
-
-    <!-- ======= Contact Section ======= -->
-    <section id="contact" class="contact">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Contact</h2>
-        </div>
-
-        <div class="row mt-1">
-
-          <div class="col-lg-4">
-            <div class="info">
-              <div class="address">
-                <i class="bi bi-geo-alt"></i>
-                <h4>Location:</h4>
-                <p>Pakijangan, Kec. Bulakamba, Kab. Brebes</p>
-              </div>
-
-              <div class="email">
-                <i class="bi bi-envelope"></i>
-                <h4>Email:</h4>
-                <p> ikhma454@gmail.com</p>
-              </div>
-
-              <div class="phone">
-                <i class="bi bi-phone"></i>
-                <h4>Call:</h4>
-                <p><a href="https://wa.me/6285156074242?text=Halo%20Ikhsan,%20">+62 851-5607-4242</a></p>
-              </div>
-
-              <div class="phone">
-                <i class="bi bi-instagram"></i>
-                <h4>Instagram:</h4>
-                <p><a href="https://www.instagram.com/ikhsanv7a_" target="_blank">@ikhsanv7a_</a></p>
-              </div>
-
-            </div>
-
-          </div>
-
-          <div class="col-lg-8 mt-5 mt-lg-0">
-
-            <div class="map-responsive">
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d247.56976811230774!2d108.96202374015033!3d-6.876668330684189!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6faf880ca4d023%3A0x1900770dbac082c2!2sPakijangan%2C%20Kec.%20Bulakamba%2C%20Kabupaten%20Brebes%2C%20Jawa%20Tengah!5e0!3m2!1sid!2sid!4v1691463441568!5m2!1sid!2sid" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-    </section><!-- End Contact Section -->
-
-  </main><!-- End #main -->
-
-  <!-- ======= Footer ======= -->
-  <footer id="footer">
+  </nav>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+    <a href="#about"         class="mobile-link">About</a>
+    <a href="#services"      class="mobile-link">Services</a>
+    <a href="#portfolio"     class="mobile-link">Portfolio</a>
+    <a href="#testimonials"  class="mobile-link">Reviews</a>
+    <a href="#contact"       class="mobile-link">Contact</a>
+  </div>
+
+  <!-- ============================================================
+       HERO
+  ============================================================ -->
+  <section id="hero" aria-label="Introduction">
     <div class="container">
-      
-      <div class="copyright">
-        &copy; Copyright <script> document.write(new Date().getFullYear()); </script><b> . Ikhsan Maulana Akhmad</b> . All Rights Reserved
-      </div>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: [license-url] -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/free-html-bootstrap-template-my-resume/ -->
-        <!-- Designed by <b>Ikhsan Maulana Akhmad</b> -->
+      <div class="hero-grid">
+        <!-- Text -->
+        <div class="hero-text">
+          <p class="hero-eyebrow">Creative Designer · Visual Storyteller</p>
+          <h1 class="hero-name">
+            Your<br />
+            <em>Name</em>
+          </h1>
+          <p class="hero-tagline">
+            I craft <strong>bold visual identities</strong> and digital experiences
+            that help brands speak louder without saying more.
+          </p>
+          <div class="hero-cta">
+            <a href="#portfolio" class="btn btn-primary">
+              <!-- Arrow icon -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16"><path d="m5 12 14 0M12 5l7 7-7 7"/></svg>
+              View Portfolio
+            </a>
+            <a href="#contact" class="btn btn-outline">Contact Me</a>
+          </div>
+        </div>
+
+        <!-- Visual -->
+        <div class="hero-visual">
+          <div class="hero-img-wrap">
+            <!-- Replace with your actual photo -->
+            <img
+              src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=900&q=80"
+              alt="Portrait of Ikhsan Maulana Akhmad — Creative Designer"
+              loading="eager"
+            />
+          </div>
+          <!-- Floating stat badge -->
+          <div class="hero-badge">
+            <span class="hero-badge-num">80+</span>
+            <span class="hero-badge-text">Projects<br />Completed</span>
+          </div>
+        </div>
       </div>
     </div>
-  </footer><!-- End Footer -->
 
-  <div id="preloader"></div>
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Scroll cue -->
+    <div class="scroll-indicator" aria-hidden="true">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
 
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/typed.js/typed.min.js"></script>
-  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <!-- ============================================================
+       ABOUT
+  ============================================================ -->
+  <section id="about" class="section" aria-label="About me">
+    <div class="container">
+      <div class="about-grid">
+        <!-- Image -->
+        <div class="about-img-wrap reveal">
+          <img
+            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=700&q=80"
+            alt="Working on a design project"
+            loading="lazy"
+          />
+        </div>
 
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
+        <!-- Content -->
+        <div class="about-text">
+          <p class="section-label reveal">About Me</p>
+          <h2 class="section-title reveal reveal-delay-1">
+            Designing <em>stories</em><br />that leave a mark.
+          </h2>
+          <div class="divider reveal reveal-delay-2"></div>
+
+          <div class="reveal reveal-delay-2">
+            <p>
+              Hi — I'm <strong>Ikhsan Maulana Akhmad</strong>, a creative designer based in [City, Country].
+              I specialise in visual identity, brand strategy, and digital design for
+              forward-thinking businesses.
+            </p>
+            <p>
+              With over <strong>5 years of experience</strong>, I've helped startups, SMEs,
+              and personal brands stand out in crowded markets through honest, intentional design.
+            </p>
+            <p>
+              My process is rooted in understanding the <em>why</em> behind each brand before
+              picking up a pencil — because great design starts with great listening.
+            </p>
+          </div>
+
+          <!-- Skills -->
+          <div class="skills-grid reveal reveal-delay-3">
+            <span class="skill-chip">Brand Identity</span>
+            <span class="skill-chip">Logo Design</span>
+            <span class="skill-chip">Typography</span>
+            <span class="skill-chip">Social Media</span>
+            <span class="skill-chip">UI/UX</span>
+            <span class="skill-chip">Art Direction</span>
+            <span class="skill-chip">Photo Editing</span>
+            <span class="skill-chip">Packaging</span>
+          </div>
+
+          <!-- Stats -->
+          <div class="stats-row reveal reveal-delay-4">
+            <div>
+              <p class="stat-num">80+</p>
+              <p class="stat-label">Projects</p>
+            </div>
+            <div>
+              <p class="stat-num">50+</p>
+              <p class="stat-label">Clients</p>
+            </div>
+            <div>
+              <p class="stat-num">5+</p>
+              <p class="stat-label">Years Exp.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SERVICES
+  ============================================================ -->
+  <section id="services" class="section" aria-label="Services">
+    <div class="container">
+      <p class="section-label reveal">What I Offer</p>
+      <h2 class="section-title reveal reveal-delay-1">Services built for<br /><em>your</em> growth.</h2>
+
+      <div class="services-grid">
+        <!-- Service cards — duplicate & edit as needed -->
+        <div class="service-card reveal reveal-delay-1">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg>
+          </div>
+          <h3 class="service-title">Logo Design</h3>
+          <p class="service-desc">A timeless mark that captures your brand's essence — crafted with intention and built to last.</p>
+        </div>
+
+        <div class="service-card reveal reveal-delay-2">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          </div>
+          <h3 class="service-title">Brand Identity</h3>
+          <p class="service-desc">Full visual identity systems — colour palettes, typography, guidelines, and brand assets.</p>
+        </div>
+
+        <div class="service-card reveal reveal-delay-3">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-4 0v2M8 21v-4a4 4 0 0 1 8 0v4"/></svg>
+          </div>
+          <h3 class="service-title">Social Media Design</h3>
+          <p class="service-desc">Feed-stopping templates, carousels, and story designs that keep your audience engaged.</p>
+        </div>
+
+        <div class="service-card reveal reveal-delay-4">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <h3 class="service-title">Packaging Design</h3>
+          <p class="service-desc">Shelf-ready packaging that tells your product's story at a glance and builds brand recall.</p>
+        </div>
+
+        <div class="service-card reveal reveal-delay-1">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <h3 class="service-title">Creative Consulting</h3>
+          <p class="service-desc">Strategic creative direction for teams who need an experienced eye on their visuals.</p>
+        </div>
+
+        <div class="service-card reveal reveal-delay-2">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+          </div>
+          <h3 class="service-title">Marketing Materials</h3>
+          <p class="service-desc">Brochures, flyers, posters, and presentations that represent your brand with confidence.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PORTFOLIO
+  ============================================================ -->
+  <section id="portfolio" class="section" aria-label="Portfolio">
+    <div class="container">
+      <div class="portfolio-header">
+        <div>
+          <p class="section-label reveal">Selected Work</p>
+          <h2 class="section-title reveal reveal-delay-1">Recent <em>projects.</em></h2>
+        </div>
+        <!-- Filter buttons -->
+        <div class="filter-bar reveal reveal-delay-2" role="group" aria-label="Filter portfolio">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="branding">Branding</button>
+          <button class="filter-btn" data-filter="social">Social Media</button>
+          <button class="filter-btn" data-filter="packaging">Packaging</button>
+          <button class="filter-btn" data-filter="ui">UI / Web</button>
+        </div>
+      </div>
+
+      <!-- Grid — add/remove .port-item cards as needed -->
+      <div class="portfolio-grid" id="portfolio-grid">
+
+        <article class="port-item reveal" data-category="branding"
+          data-title="Lune Coffee Brand Identity"
+          data-desc="A complete rebrand for an artisan coffee roastery — including wordmark, secondary mark, colour system, and brand guidelines to unify all touchpoints."
+          data-img="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=900&q=80">
+          <div class="port-thumb">
+            <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=700&q=80" alt="Lune Coffee Brand Identity" loading="lazy" />
+            <div class="port-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+            <span class="port-category-badge">Branding</span>
+          </div>
+          <div class="port-info">
+            <h3 class="port-title">Lune Coffee — Brand Identity</h3>
+            <p class="port-desc">Visual identity system for an artisan coffee roastery.</p>
+          </div>
+        </article>
+
+        <article class="port-item reveal reveal-delay-1" data-category="social"
+          data-title="Bloom Skincare Social Templates"
+          data-desc="Monthly feed design system for a clean beauty brand — 30+ customisable Instagram and TikTok templates that maintained a cohesive aesthetic across 6 months."
+          data-img="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=900&q=80">
+          <div class="port-thumb">
+            <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=700&q=80" alt="Bloom Skincare Social Templates" loading="lazy" />
+            <div class="port-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+            <span class="port-category-badge">Social Media</span>
+          </div>
+          <div class="port-info">
+            <h3 class="port-title">Bloom Skincare — Social Templates</h3>
+            <p class="port-desc">30+ Instagram & TikTok templates for a clean beauty brand.</p>
+          </div>
+        </article>
+
+        <article class="port-item reveal reveal-delay-2" data-category="packaging"
+          data-title="Verdure Tea Packaging"
+          data-desc="Premium tea packaging for a direct-to-consumer wellness brand. Hand-illustrated botanicals layered over minimal geometric forms, designed for shelf impact and unboxing delight."
+          data-img="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80">
+          <div class="port-thumb">
+            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80" alt="Verdure Tea Packaging" loading="lazy" />
+            <div class="port-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+            <span class="port-category-badge">Packaging</span>
+          </div>
+          <div class="port-info">
+            <h3 class="port-title">Verdure Tea — Packaging</h3>
+            <p class="port-desc">Illustrated premium packaging for a direct-to-consumer wellness brand.</p>
+          </div>
+        </article>
+
+        <article class="port-item reveal reveal-delay-3" data-category="ui"
+          data-title="Arcis Studio Landing Page"
+          data-desc="Landing page UI design for an architecture studio — full responsive design system in Figma, handed off with detailed component documentation and motion specs."
+          data-img="https://images.unsplash.com/photo-1616400619175-5beda3a17896?w=900&q=80">
+          <div class="port-thumb">
+            <img src="https://images.unsplash.com/photo-1616400619175-5beda3a17896?w=700&q=80" alt="Arcis Studio Landing Page" loading="lazy" />
+            <div class="port-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+            <span class="port-category-badge">UI / Web</span>
+          </div>
+          <div class="port-info">
+            <h3 class="port-title">Arcis Studio — Landing Page</h3>
+            <p class="port-desc">Full responsive UI design system for an architecture studio.</p>
+          </div>
+        </article>
+
+        <article class="port-item reveal" data-category="branding"
+          data-title="Nord Bakery Visual Identity"
+          data-desc="Minimalist Scandinavian-inspired identity for an artisan bakery concept — monochrome palette, bespoke logotype, and an editorial style guide."
+          data-img="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=900&q=80">
+          <div class="port-thumb">
+            <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=700&q=80" alt="Nord Bakery Visual Identity" loading="lazy" />
+            <div class="port-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+            <span class="port-category-badge">Branding</span>
+          </div>
+          <div class="port-info">
+            <h3 class="port-title">Nord Bakery — Visual Identity</h3>
+            <p class="port-desc">Scandinavian-inspired identity for an artisan bakery concept.</p>
+          </div>
+        </article>
+
+        <article class="port-item reveal reveal-delay-1" data-category="social"
+          data-title="Soleil Fitness Content Suite"
+          data-desc="12-month content design suite for a fitness coach's Instagram — story highlights, carousels, reel covers, and a custom font pairing that tripled engagement."
+          data-img="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=900&q=80">
+          <div class="port-thumb">
+            <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=700&q=80" alt="Soleil Fitness Content Suite" loading="lazy" />
+            <div class="port-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+            <span class="port-category-badge">Social Media</span>
+          </div>
+          <div class="port-info">
+            <h3 class="port-title">Soleil Fitness — Content Suite</h3>
+            <p class="port-desc">12-month Instagram content design suite for a fitness coach.</p>
+          </div>
+        </article>
+
+      </div><!-- /portfolio-grid -->
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PORTFOLIO MODAL
+  ============================================================ -->
+  <div id="modal-overlay" role="dialog" aria-modal="true" aria-label="Project detail">
+    <div class="modal">
+      <button class="modal-close" id="modal-close" aria-label="Close modal">✕</button>
+      <img id="modal-img" src="" alt="" class="modal-img" />
+      <div class="modal-body">
+        <p class="modal-tag" id="modal-tag"></p>
+        <h3 class="modal-title" id="modal-title"></h3>
+        <p class="modal-desc" id="modal-desc"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       TESTIMONIALS
+  ============================================================ -->
+  <section id="testimonials" class="section" aria-label="Testimonials">
+    <div class="container">
+      <p class="section-label reveal">Client Reviews</p>
+      <h2 class="section-title reveal reveal-delay-1">Words from<br /><em>happy</em> clients.</h2>
+
+      <div class="testi-grid">
+
+        <div class="testi-card reveal reveal-delay-1">
+          <div class="star-row" aria-label="5 stars">
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <p class="testi-quote">&ldquo;</p>
+          <p class="testi-text">Working with Ikhsan Maulana Akhmad completely transformed how our brand shows up online. The identity system felt so authentically us — our customers noticed immediately.</p>
+          <div class="testi-author">
+            <img src="https://i.pravatar.cc/80?img=47" alt="Sasha Lee" class="testi-avatar" loading="lazy" />
+            <div>
+              <p class="testi-name">Sasha Lee</p>
+              <p class="testi-role">Founder, Bloom Skincare</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card reveal reveal-delay-2">
+          <div class="star-row" aria-label="5 stars">
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <p class="testi-quote">&ldquo;</p>
+          <p class="testi-text">The social media templates are incredible — our engagement tripled in the first two months. Worth every penny, and the turnaround was faster than expected.</p>
+          <div class="testi-author">
+            <img src="https://i.pravatar.cc/80?img=12" alt="Marco Dani" class="testi-avatar" loading="lazy" />
+            <div>
+              <p class="testi-name">Marco Dani</p>
+              <p class="testi-role">Head of Marketing, Soleil Fitness</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card reveal reveal-delay-3">
+          <div class="star-row" aria-label="5 stars">
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <p class="testi-quote">&ldquo;</p>
+          <p class="testi-text">Exceptional taste, sharp instincts, and reliable communication throughout. I would recommend without hesitation to any brand that takes their visuals seriously.</p>
+          <div class="testi-author">
+            <img src="https://i.pravatar.cc/80?img=31" alt="Nina Okafor" class="testi-avatar" loading="lazy" />
+            <div>
+              <p class="testi-name">Nina Okafor</p>
+              <p class="testi-role">Creative Director, Arcis Studio</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CONTACT
+  ============================================================ -->
+  <section id="contact" class="section" aria-label="Contact">
+    <div class="container">
+      <p class="section-label reveal">Get in Touch</p>
+      <h2 class="section-title reveal reveal-delay-1">Let's create<br /><em>something</em> together.</h2>
+      <div class="divider reveal reveal-delay-2"></div>
+
+      <div class="contact-grid">
+        <!-- Info -->
+        <div class="contact-info reveal reveal-delay-2">
+          <p>Have a project in mind? I'd love to hear about it. Send a message or reach out directly — I typically respond within 24 hours.</p>
+
+          <div class="contact-details">
+            <div class="contact-detail">
+              <div class="contact-detail-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <span>hello@yourname.com</span>
+            </div>
+
+            <div class="contact-detail">
+              <div class="contact-detail-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </div>
+              <span>+62 812 3456 7890</span>
+            </div>
+
+            <div class="contact-detail">
+              <div class="contact-detail-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <span>City, Country</span>
+            </div>
+          </div>
+
+          <!-- WhatsApp -->
+          <a href="https://wa.me/6281234567890" target="_blank" rel="noopener" class="wa-btn">
+            <!-- WhatsApp icon -->
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+            Chat on WhatsApp
+          </a>
+        </div>
+
+        <!-- Form -->
+        <form class="contact-form reveal reveal-delay-3" id="contact-form" novalidate>
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="Jane Smith" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="jane@example.com" required />
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Tell me about your project..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16"><path d="m22 2-7 20-4-9-9-4 20-7zM22 2 11 13"/></svg>
+            Send Message
+          </button>
+          <!-- Status message -->
+          <p id="form-status" style="margin-top:.8rem;font-size:.82rem;color:var(--accent);display:none;text-align:center;"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <a href="#hero" class="footer-logo">YN.</a>
+        <p class="footer-copy">&copy; <span id="year"></span> Ikhsan Maulana Akhmad. All rights reserved.</p>
+        <div class="social-links">
+          <!-- Instagram -->
+          <a href="https://instagram.com/yourhandle" target="_blank" rel="noopener" class="social-link" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg>
+          </a>
+          <!-- TikTok -->
+          <a href="https://tiktok.com/@yourhandle" target="_blank" rel="noopener" class="social-link" aria-label="TikTok">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.22 8.22 0 0 0 4.8 1.52V6.75a4.85 4.85 0 0 1-1.03-.06z"/></svg>
+          </a>
+          <!-- LinkedIn -->
+          <a href="https://linkedin.com/in/yourhandle" target="_blank" rel="noopener" class="social-link" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <!-- Behance -->
+          <a href="https://behance.net/yourhandle" target="_blank" rel="noopener" class="social-link" aria-label="Behance">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15"><path d="M22 7h-7V5h7v2zm1.726 10c-.442 1.297-2.029 3-5.101 3-3.074 0-5.564-1.729-5.564-5.675 0-3.91 2.325-5.92 5.466-5.92 3.082 0 4.964 1.782 5.375 4.426.078.506.109 1.188.095 2.14H15.97c.13 3.211 3.483 3.312 4.588 2.029H23.7zm-7.177-4h4.458c-.073-.174-.809-2.1-2.237-2.1-1.428 0-2.187 1.926-2.22 2.1zM7.184 5.1H0v13.8h7.785c5.741 0 6.3-4.75 4.019-6.7 1.25-.8 2.006-2.04 2.006-3.6 0-2.053-1.608-3.5-6.626-3.5zm-.908 5.5H2.99V7.4h3.286c1.43 0 1.43 3.2 0 3.2zm.366 5.5H2.99v-3.4h3.652c1.822 0 1.822 3.4 0 3.4z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       JAVASCRIPT
+  ============================================================ -->
+  <script>
+    'use strict';
+
+    /* ── Loader ─────────────────────────────────────────────── */
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('loader').classList.add('hidden');
+      }, 1500);
+    });
+
+    /* ── Year ───────────────────────────────────────────────── */
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    /* ── Navbar scroll effect ────────────────────────────────── */
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    /* ── Dark / Light theme toggle ───────────────────────────── */
+    const html        = document.documentElement;
+    const themeBtn    = document.getElementById('theme-toggle');
+    const iconSun     = document.getElementById('icon-sun');
+    const iconMoon    = document.getElementById('icon-moon');
+    const savedTheme  = localStorage.getItem('theme') ||
+                        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+    function applyTheme(t) {
+      html.setAttribute('data-theme', t);
+      localStorage.setItem('theme', t);
+      iconSun.style.display  = t === 'dark' ? 'block' : 'none';
+      iconMoon.style.display = t === 'dark' ? 'none'  : 'block';
+    }
+
+    applyTheme(savedTheme);
+    themeBtn.addEventListener('click', () => {
+      applyTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    });
+
+    /* ── Mobile hamburger menu ───────────────────────────────── */
+    const hamburger   = document.getElementById('hamburger');
+    const mobileMenu  = document.getElementById('mobile-menu');
+
+    hamburger.addEventListener('click', () => {
+      const open = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('open', open);
+      hamburger.setAttribute('aria-expanded', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+
+    // Close on link click
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+
+    /* ── Scroll reveal (IntersectionObserver) ────────────────── */
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          revealObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    /* ── Portfolio filter ────────────────────────────────────── */
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const portItems  = document.querySelectorAll('.port-item');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const filter = btn.dataset.filter;
+
+        portItems.forEach(item => {
+          const match = filter === 'all' || item.dataset.category === filter;
+          item.classList.toggle('hidden', !match);
+        });
+      });
+    });
+
+    /* ── Portfolio modal ─────────────────────────────────────── */
+    const overlay    = document.getElementById('modal-overlay');
+    const modalClose = document.getElementById('modal-close');
+    const modalImg   = document.getElementById('modal-img');
+    const modalTag   = document.getElementById('modal-tag');
+    const modalTitle = document.getElementById('modal-title');
+    const modalDesc  = document.getElementById('modal-desc');
+
+    portItems.forEach(item => {
+      item.addEventListener('click', () => {
+        modalImg.src           = item.dataset.img;
+        modalImg.alt           = item.dataset.title;
+        modalTag.textContent   = item.dataset.category.replace(/\b\w/g, c => c.toUpperCase());
+        modalTitle.textContent = item.dataset.title;
+        modalDesc.textContent  = item.dataset.desc;
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    function closeModal() {
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    modalClose.addEventListener('click', closeModal);
+    overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+    /* ── Contact form (demo) ─────────────────────────────────── */
+    const form       = document.getElementById('contact-form');
+    const formStatus = document.getElementById('form-status');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('button[type="submit"]');
+      btn.textContent = 'Sending…';
+      btn.disabled = true;
+
+      // Simulate async send — replace with your actual fetch/API call
+      setTimeout(() => {
+        formStatus.style.display = 'block';
+        formStatus.textContent   = '✓ Message sent! I'll be in touch within 24 hours.';
+        form.reset();
+        btn.textContent = 'Send Message';
+        btn.disabled = false;
+      }, 1600);
+    });
+  </script>
 
 </body>
-
 </html>
